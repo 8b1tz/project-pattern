@@ -35,19 +35,22 @@ class StrategyComparePorPeso(StrategyComparacao):
 
 class GeradorComparacao:
 
-    def geradorComparacao(self, strategyComparacao):
-        self.strategyComparacao  = strategyComparacao
+    def __init__(self, strategy):
+        self.strategy = strategy
 
-    def gerarComparacao(pessoa1, pessoa2):
-        return strategyComparacao.comparar(pessoa1, pessoa2)
+    def gerarComparacao(self, pessoa1, pessoa2):
+        return self.strategy.comparar(pessoa1, pessoa2)
 
-def teste():
-    geradorComparacao = GeradorComparacao(StrategyComparacao(StrategyComparePorAltura))
+def main():
+    geradorComparacaoA = GeradorComparacao(StrategyComparePorAltura)
+    geradorComparacaoP = GeradorComparacao(StrategyComparePorPeso)
+    geradorComparacaoI = GeradorComparacao(StrategyComparePorIdade)
 
-    pessoaA = Pessoa("jessica", 20, 70, 1.80)
+    pessoaA = Pessoa("Jessica", 20, 70, 1.80)
     pessoaB = Pessoa("Joao", 40, 60, 1.90)
 
-    geradorComparacao.gerarComparacao(pessoaA, pessoaB)
+    print ( geradorComparacaoA.gerarComparacao(pessoaA, pessoaB) )
+    print ( geradorComparacaoP.gerarComparacao(pessoaA, pessoaB) )
+    print ( geradorComparacaoI.gerarComparacao(pessoaA, pessoaB) )
 
-
-teste()
+main()
